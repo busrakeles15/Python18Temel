@@ -6,12 +6,26 @@ def DosyaAc(adres="defter.csv"):
         return open(adres,"w+",encoding="UTF-8")
 
 
+def KayitListele(liste):
+    for i in range(len(liste)):
+        satir = liste[i].split(";")
+        print(f"{i+1}-{satir[0]} {satir[1]} {satir[2]}")
+
 dosya = DosyaAc()
-# print(dosya.read())
-# print(dosya.readline(30))
-dosya.read(25)
-# dosya.write("Faruk;Soner;555741852\n")
-dosya.flush()
-print(dosya.tell())
-dosya.seek(0)
-print(dosya.readlines())
+liste = dosya.readlines()
+KayitListele(liste)
+
+
+def YeniKayit(liste):
+    liste.append(GirisAl())
+    return liste
+
+def GirisAl():
+    adi = input("Adi Giriniz:")
+    soyadi = input("Soyadi Giriniz:")
+    tel = input("Telefon Giriniz")
+    return f"{adi};{soyadi};{tel}\n"
+
+YeniKayit(liste)
+
+KayitListele(liste)
