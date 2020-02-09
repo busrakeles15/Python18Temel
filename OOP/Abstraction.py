@@ -1,11 +1,20 @@
+from abc import abstractclassmethod,ABCMeta
 
-class Mamal():
+class Animal:
+
+    __metaclass__ = ABCMeta
+    @abstractclassmethod
+    def beslenme(self):
+        print("Ben bir canlıyım")
+
+class Mamal(Animal):
     def __init__(self,adi,yas,tur):
         self.adi = adi
         self.yas = yas
         self.tur = tur
 
     def beslenme(self):
+        super(Mamal,self).beslenme()
         print(self.adi,"Beslenme")
 
     def SesCikar(self):
@@ -14,6 +23,10 @@ class Mamal():
 class Kopek(Mamal):
     def __init__(self,adi,yas):
         super().__init__(adi,yas,"Kopek")
+    
+    def beslenme(self):
+        super(Kopek,self).beslenme()
+        print("Kemik Beslendi")
 
 
 class Kedi(Mamal):
@@ -21,11 +34,5 @@ class Kedi(Mamal):
         super().__init__(adi,yas,"Kedi")
 
 
-Kemik = Kopek("Kemik",5)
+Kemik = Kopek("Kemik",10)
 Kemik.beslenme()
-print(Kemik.tur)
-Kemik.SesCikar()
-Melek = Kedi("Melek",3)
-Melek.beslenme()
-Melek.SesCikar()
-print(Melek.tur)

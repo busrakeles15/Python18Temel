@@ -3,9 +3,11 @@ class Kedi:
     def __init__(self,adi,yas): #constructor # Yapıcı
         self.adi = adi # instance attribute # ornek özellik
         self.yas = yas
-    
+        
+
+
     def miyavla(self): # instance method # ornek metod
-        print(self.adi,"Miyavladı")
+        print(self.adi,Kedi.tur,"Miyavladı")
     
     @classmethod
     def turSoyle(cls): # class method # Sınıf metodu
