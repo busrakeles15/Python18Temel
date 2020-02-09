@@ -10,6 +10,8 @@ class MarvelHero:
     def sayacarttir(self,isim):
         self.sayac[isim] += 1
     
+
+    
     def vur(self):
         self.sayacarttir(self.vur.__name__)
         return self.guc
@@ -50,6 +52,16 @@ class DeadPool(MarvelHero):
     def __init__(self):
         super().__init__(100, 600, "Deadpool",4)
 
+
+    def Defans(self,guc):
+        print(self.isim,"Süper Güç Kullanıldı")
+        import random as rnd
+        if self.sayac["savunma"]>4:
+            self.sayac["savunma"]=0
+            self.saglik += 200
+        liste = [self.kacinma,self.savunma,self.darbe]
+        return rnd.choice(liste)(guc)   
+
 class Hulk(MarvelHero):
     def __init__(self):
         super().__init__(100, 800, "Hulk",2)
@@ -57,10 +69,30 @@ class Hulk(MarvelHero):
 class IronMan(MarvelHero):
     def __init__(self):
         super().__init__(90, 500, "IronMan",5)
+    def Defans(self,guc):
+        print(self.isim,"Süper Güç Kullanıldı")
+        import random as rnd
+        if self.sayac["Darbe"]>2:
+            self.sayac["Darbe"]=0
+            self.saglik += 200
+        liste = [self.kacinma,self.savunma,self.darbe]
+        return rnd.choice(liste)(guc)  
 
 class CaptainAmerica(MarvelHero):
     def __init__(self):
         super().__init__(75, 500, "CaptainAmerica",4)
+
+    def Ofans(self):
+        print(self.isim,"Süper Güç Kullanıldı")
+        guc = 0
+        import random as rnd
+        liste = [self.vur,self.vur2,self.vur3]
+        guc =  rnd.choice(liste)()
+        if self.sayac["vur"]>3:
+            guc *= 2
+            self.sayac["vur"] = 0
+        return guc
+        
     
 import random as rnd
 import time
