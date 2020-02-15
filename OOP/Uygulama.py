@@ -9,9 +9,7 @@ class MarvelHero:
 
     def sayacarttir(self,isim):
         self.sayac[isim] += 1
-    
-
-    
+        
     def vur(self):
         self.sayacarttir(self.vur.__name__)
         return self.guc
@@ -72,9 +70,9 @@ class IronMan(MarvelHero):
     def Defans(self,guc):
         print(self.isim,"Süper Güç Kullanıldı")
         import random as rnd
-        if self.sayac["Darbe"]>2:
-            self.sayac["Darbe"]=0
-            self.saglik += 200
+        # if self.sayac["Darbe"]>2:
+        #     self.sayac["Darbe"]=0
+        #     self.saglik += 200
         liste = [self.kacinma,self.savunma,self.darbe]
         return rnd.choice(liste)(guc)  
 
@@ -92,17 +90,69 @@ class CaptainAmerica(MarvelHero):
             guc *= 2
             self.sayac["vur"] = 0
         return guc
-        
-    
 import random as rnd
-import time
-karlist = [DeadPool,Hulk,IronMan,CaptainAmerica]
-P1 = rnd.choice(karlist)()
-P2 = rnd.choice(karlist)()
-while P1.saglik > 0 and P2.saglik > 0:
-    time.sleep(1)
-    P1.Defans(P2.Ofans())
-    print(f"{P1.isim} Saglık:{P1.saglik} {P2.isim} Saglık:{P2.saglik}")
-    time.sleep(1)
-    P2.Defans(P1.Ofans())
-    print(f"{P1.isim} Saglık:{P1.saglik} {P2.isim} Saglık:{P2.saglik}")
+import time       
+class Oyun():
+
+    def __init__(self,tip = 0):
+
+        self.tip = tip
+        self.karlist = [DeadPool,Hulk,IronMan,CaptainAmerica]
+        self.P1 = None
+        self.P2 = None
+        self.OyunSec()
+
+    def OyunSec(self):
+        if self.tip:
+            self.USvsPC()
+        else:
+            self.PCvsPC()
+
+    def PCvsPC(self):
+        self.P1 = rnd.choice(self.karlist)()
+        self.P2 = rnd.choice(self.karlist)()
+        while self.P1.saglik > 0 and self.P2.saglik > 0:
+            time.sleep(1)
+            self.P1.Defans(P2.Ofans())
+            print(f"{self.P1.isim} Saglık:{self.P1.saglik} {self.P2.isim} Saglık:{self.P2.saglik}")
+            time.sleep(1)
+            P2.Defans(P1.Ofans())
+            print(f"{self.P1.isim} Saglık:{self.P1.saglik} {self.P2.isim} Saglık:{self.P2.saglik}")
+    
+    def USvsPC(self):
+        self.P1 = rnd.choice(self.karlist)()
+        for i in range(len(self.karlist)):
+            print(f"{i+1}-{self.karlist[i].__name__}")
+        self.P2 = self.karlist[int(input("Karakteri seçiniz"))-1]()
+        while self.P1.saglik > 0 and self.P2.saglik > 0:
+            time.sleep(1)
+            self.P1.Defans(self.OfansSec())
+            print(f"{self.P1.isim} Saglık:{self.P1.saglik} {self.P2.isim} Saglık:{self.P2.saglik}")
+            time.sleep(1)
+            self.DefansSec(self.P1.Ofans())
+            print(f"{self.P1.isim} Saglık:{self.P1.saglik} {self.P2.isim} Saglık:{self.P2.saglik}")
+    
+    def OfansSec(self):
+        menu = """
+        1 -vur1
+        2 -vur2
+        3 -vur3
+        Saldırı Tipini Seçiniz:
+        """
+        hareket =int(input(menu))
+        if hareket == 1:
+            fonk = self.P2.vur()
+        return fonk
+
+    def DefansSec(self,guc):
+        menu = """
+        1 -Kaçınma
+        2 -Savunma
+        3 -Darbe
+        Savunma Tipini Seçiniz:
+        """
+        defans = int(input(menu))
+        if defans == 1:
+           fonk = self.P2.kacinma
+        return fonk(guc)
+
