@@ -7,8 +7,11 @@ cur = db.cursor()
 # SELECT adi,
 #        soyadi
 #   FROM personeller where adi = '{aranan}'
-# """
-sorgu = """
+# """ü
+
+dep_adi = input("Departman Adı Giriniz:")
+lokid = input("Lokasyon id Giriniz:")
+sorgu = f"""
 insert into departmanlar
 (departman_adi,lokasyon_id)
 values ('{dep_adi}',{lokid})
